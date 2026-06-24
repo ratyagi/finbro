@@ -1,7 +1,8 @@
-<milestone number="1" title="Engineering, Mathematical & Data Foundations for ML Systems">
-<domain_scope>
+## milestone number="1" title="Engineering, Mathematical & Data Foundations for ML Systems"
+### domain_scope:
 By the end of M1 the learner can write correct, performant, well-tested Python systems code; reason about data structures, complexity, and numerical stability; manipulate data at scale with modern DataFrame/SQL tooling; and stand up reproducible compute environments. This is the prerequisite layer for every later milestone: each subsequent milestone assumes the engineer can ship clean code, query data correctly without leakage, and reason mathematically about what models actually compute. Concretely, the learner can take a messy real-world dataset, build a reproducible, version-controlled, containerized pipeline that loads larger-than-memory data, and reason about the linear-algebra and probability primitives that underlie embeddings, optimization, and attention. Without this layer, every model the engineer later builds will be fragile, irreproducible, or quietly wrong.
-</domain_scope>
+
+
 <competency_targets>
 - By the end of this milestone, the engineer should be able to write idiomatic, fully type-annotated Python (validated with mypy/ruff), structure it into packages, and achieve meaningful test coverage with pytest including property-based tests for numerical code.
 - By the end of this milestone, the engineer should be able to derive and implement gradient descent, the chain rule, and backpropagation from scratch in pure NumPy without relying on autograd.
@@ -11,7 +12,9 @@ By the end of M1 the learner can write correct, performant, well-tested Python s
 - By the end of this milestone, the engineer should be able to reason about floating-point precision (fp32/bf16/fp8), implement a numerically stable softmax/log-sum-exp, and predict where naive implementations overflow.
 - By the end of this milestone, the engineer should be able to design a relational + object-storage schema, version data and pipelines with DVC/lakeFS, and reproduce any artifact from a commit hash.
 </competency_targets>
-<exhaustive_topics>
+
+
+### <exhaustive_topics>
 - **SVD and low-rank approximation for embeddings and compression.** Why it matters: underpins dimensionality reduction, PCA, embedding compression, and conceptually LoRA. Foundations: orthogonal decomposition, singular values as energy, Eckart–Young optimality. Production realities: truncated/randomized SVD on sparse matrices; numerical rank vs mathematical rank. Pitfalls: treating tiny singular values as signal; centering before PCA. Senior signal: can explain when a rank-k approximation preserves task-relevant variance and when it destroys it.
 - **Eigendecomposition and positive semi-definite matrices.** Why: covariance, kernels, optimization curvature. Foundations: spectral theorem, PSD-ness, condition number. Pitfalls: assuming symmetry where none exists; ill-conditioning. Senior signal: links condition number to optimization difficulty.
 - **Matrix calculus, Jacobians, and the chain rule.** Why: backprop is mechanical chain rule over tensors. Foundations: vector-Jacobian products, reverse-mode AD. Pitfalls: shape mismatches, transposition errors. Senior signal: hand-derives gradients of a 2-layer MLP and matches autograd.
@@ -26,14 +29,17 @@ By the end of M1 the learner can write correct, performant, well-tested Python s
 - **Data and pipeline versioning (DVC, lakeFS).** Why: reproducibility. Foundations: content-addressable storage, branching. Pitfalls: versioning code but not data. Senior signal: reproduces a result from a commit + data version.
 - **Git, CI, and Docker for reproducible environments.** Why: parity between dev/train/serve. Foundations: layer caching, pinned deps. Pitfalls: latest tags, unpinned CUDA. Senior signal: produces bit-reproducible container builds.
 - **Complexity and data structures for ML.** Why: hashing/trees/heaps recur in retrieval and feature stores. Foundations: amortized analysis. Pitfalls: O(n²) joins hidden in pandas. Senior signal: chooses the right structure for the access pattern.
-</exhaustive_topics>
-<production_tech_stack>
-Core languages and frameworks: Python 3.12+, NumPy, type hints, pytest, ruff, mypy — correctness and performance floor for everything later. Data manipulation/storage/query: Polars (lazy/streaming), DuckDB, pandas, Parquet/Arrow, PostgreSQL/SQL — larger-than-memory processing and leakage-free joins. Experimentation/tracking/reproducibility: Git, DVC or lakeFS, Docker — reproducible artifacts from commit hashes. Training/compute/acceleration: local CPU + entry-level GPU (the math, not scale, is the focus here). Serving/deployment/orchestration: none yet — introduced in M4/M5. Monitoring/observability/quality: basic data-quality assertions. Cloud/infra primitives: an object store (S3/GCS) and containers. Each tool earns its place because M1 is about correctness, reproducibility, and scale fundamentals before any model is trained.
-</production_tech_stack>
-<strategic_capstone_project deploy="false"></strategic_capstone_project>
-</milestone>
 
-<milestone number="2" title="Classical ML, Experimentation Discipline & Evaluation Rigor">
+
+
+### <production_tech_stack>
+Core languages and frameworks: Python 3.12+, NumPy, type hints, pytest, ruff, mypy — correctness and performance floor for everything later. Data manipulation/storage/query: Polars (lazy/streaming), DuckDB, pandas, Parquet/Arrow, PostgreSQL/SQL — larger-than-memory processing and leakage-free joins. Experimentation/tracking/reproducibility: Git, DVC or lakeFS, Docker — reproducible artifacts from commit hashes. Training/compute/acceleration: local CPU + entry-level GPU (the math, not scale, is the focus here). Serving/deployment/orchestration: none yet — introduced in M4/M5. Monitoring/observability/quality: basic data-quality assertions. Cloud/infra primitives: an object store (S3/GCS) and containers. Each tool earns its place because M1 is about correctness, reproducibility, and scale fundamentals before any model is trained.
+
+<strategic_capstone_project deploy="false"></strategic_capstone_project>
+
+
+
+## milestone number="2" title="Classical ML, Experimentation Discipline & Evaluation Rigor"
 <domain_scope>
 By the end of M2 the learner can frame a supervised problem, build leakage-free pipelines, train and tune gradient-boosted trees and linear/logistic models, and — most critically — design evaluations that predict production performance rather than overfit a leaderboard. Gradient-boosted trees remain the dominant approach for tabular problems in 2026, so this milestone is not legacy material: it is where the engineer internalizes the discipline (cross-validation design, metric selection, leakage detection, experiment tracking) that separates engineers who ship reliable models from those who ship impressive-looking ones that collapse online. This discipline transfers directly to evaluating deep-learning and LLM systems later.
 </domain_scope>
